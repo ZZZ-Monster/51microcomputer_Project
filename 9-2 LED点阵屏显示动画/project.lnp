@@ -1,0 +1,6 @@
+"mian.obj",
+"delay.obj",
+"matrixLED.obj" 
+TO "project" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

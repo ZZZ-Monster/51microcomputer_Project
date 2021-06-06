@@ -1,0 +1,74 @@
+C51 COMPILER V9.01   KEY2                                                                  05/22/2021 18:31:15 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE KEY2
+OBJECT MODULE PLACED IN Key2.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Key2.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "DELAY.H" 
+   3          //获取独立按键的键码
+   4          
+   5          
+   6          
+   7          unsigned char Key_KeyNumber;
+   8          
+   9          
+  10          
+  11          unsigned char Key(void)
+  12          {
+  13   1              unsigned char Temp;
+  14   1              Temp=Key_KeyNumber;
+  15   1              Key_KeyNumber=0;
+  16   1              return Temp;
+  17   1      }
+  18          
+  19          
+  20          
+  21          
+  22          
+  23          unsigned char Key_GetState()
+  24          {
+  25   1              unsigned char KeyNumber=0;
+  26   1              if(P3_1==0){KeyNumber=1;}
+  27   1              if(P3_0==0){KeyNumber=2;}
+  28   1              if(P3_2==0){KeyNumber=3;}
+  29   1              if(P3_3==0){KeyNumber=4;}
+  30   1              return KeyNumber;
+  31   1      }
+  32          
+  33          
+  34          void Key_Loop(void)
+  35          {
+  36   1              static unsigned char NowState,LastState;
+  37   1              LastState=NowState;
+  38   1              NowState=Key_GetState();
+  39   1              if(LastState==1&&NowState==0){Key_KeyNumber=1;}
+  40   1              if(LastState==2&&NowState==0){Key_KeyNumber=2;}  
+  41   1              if(LastState==3&&NowState==0){Key_KeyNumber=3;}  
+  42   1              if(LastState==4&&NowState==0){Key_KeyNumber=4;}    
+  43   1      }
+  44          
+  45          
+  46          
+  47          
+  48          
+  49          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   KEY2                                                                  05/22/2021 18:31:15 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

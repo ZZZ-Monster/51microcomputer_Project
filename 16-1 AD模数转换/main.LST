@@ -1,0 +1,47 @@
+C51 COMPILER V9.01   MAIN                                                                  05/07/2021 08:44:29 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H"
+   3          #include "LCD1602.H"
+   4          #include "XPT2046.H"
+   5          
+   6          unsigned int ADvalue; 
+   7          void main()
+   8          {       
+   9   1              
+  10   1              LCD_Init();
+  11   1              LCD_ShowString(1,1,"ADJ");
+  12   1              while(1)
+  13   1              {
+  14   2                      ADvalue=XPT2046_readAD(XPT2046_XP);
+  15   2                      LCD_ShowNum(2,1,ADvalue,4);
+  16   2                      delay(10);
+  17   2                      ADvalue=XPT2046_readAD(XPT2046_YP);
+  18   2                      LCD_ShowNum(2,6,ADvalue,4);
+  19   2                      delay(10);
+  20   2                      ADvalue=XPT2046_readAD(XPT2046_AUX);
+  21   2                      LCD_ShowNum(2,11,ADvalue,4);
+  22   2                      delay(10);
+  23   2              }
+  24   1      }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    108    ----
+   CONSTANT SIZE    =      4    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

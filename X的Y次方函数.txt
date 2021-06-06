@@ -1,0 +1,20 @@
+//x的y次方函数
+int Pow(int X,int Y)
+{
+	 unsigned char i;
+	 int result=1;
+	 for(i=0;i<Y;i++)
+	 {
+	 	  result*=X;
+	 }
+	 return result;
+}
+
+
+
+对i遍历
+Number/Pow(10,i-1)%10       十进制数
+
+Number/Pow(16,i-1)%16	    十六进制数	
+
+Number/Pow(2,i-1)%2	    二进制数

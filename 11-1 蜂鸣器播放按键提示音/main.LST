@@ -1,0 +1,47 @@
+C51 COMPILER V9.01   MAIN                                                                  05/13/2021 10:14:03 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          
+   3          #include "delay.H"
+   4          #include "matrixkey.H" 
+   5          #include "Nixie.H"  
+   6          #include "Buzzer.H"  
+   7          
+   8          
+   9          unsigned char Number;
+  10          
+  11          
+  12          void main()
+  13          {
+  14   1              Nixie(1,0);
+  15   1              while(1)
+  16   1              {
+  17   2                      Number=matrixkey();
+  18   2                      if(Number)
+  19   2                      {
+  20   3                              Buzzer_Time(100);
+  21   3                              Nixie(1,Number);
+  22   3                      }
+  23   2              }
+  24   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     36    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

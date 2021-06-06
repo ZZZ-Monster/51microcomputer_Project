@@ -1,0 +1,54 @@
+C51 COMPILER V9.01   PROJECT                                                               05/04/2021 17:30:05 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE PROJECT
+OBJECT MODULE PLACED IN project.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE project.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include <INTRINS.H>
+   3          
+   4          
+   5          
+   6          void delay(int ms)              //@12.000MHz
+   7          {
+   8   1              while(ms)
+   9   1              {
+  10   2                      unsigned char i, j;
+  11   2                      i = 2;
+  12   2                      j = 239;
+  13   2                      do
+  14   2                              {
+  15   3                                      while (--j);
+  16   3                              } 
+  17   2                              while (--i);
+  18   2                      ms--;
+  19   2              }       
+  20   1      }
+  21          
+  22          void main()
+  23          {       
+  24   1              while(1)
+  25   1              {
+  26   2                      P2_1=0;    //只亮最后一个1111 1110
+  27   2                      delay(20);  //延时
+  28   2                      P2_1=~P2_1; //全灭，1111 1111
+  29   2                      delay(20);  //延时      
+  30   2              }
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     44    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

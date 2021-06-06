@@ -1,0 +1,119 @@
+C51 COMPILER V9.01   TIMER0                                                                05/25/2021 15:09:12 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TIMER0
+OBJECT MODULE PLACED IN Timer0.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Timer0.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          //中断一般用来处理不确定的因素，如按键、发来的不定时信号等。
+   3          //定时器0初始化，1毫秒
+   4          void Timer0Init(void)           //1毫秒@12.000MHz
+   5          {
+   6   1      
+   7   1              TMOD &= 0xF0;           //设置定时器模式
+   8   1              TMOD |= 0x01;           //设置定时器模式
+   9   1              TL0 = 0x18;             //设置定时初始值
+  10   1              TH0 = 0xFC;             //设置定时初始值
+  11   1              TF0 = 0;                //清除TF0标志
+  12   1              TR0 = 1;                //定时器0开始计时
+  13   1              ET0=1;          //中断允许控制            （允许T0中断）
+  14   1              EA=1;           //                                                （开放中断）
+  15   1              PT0=0;                  //优先级控制             （低级的优先级）（默认也是低级）
+  16   1      }
+  17          
+  18          
+  19          //1秒=1000毫秒ms=1000 000微妙μs
+  20          
+  21          /*定时器中断函数模板（灯的一秒闪烁）
+  22          void Timer0_Routine() interrupt 1       //调用T0，溢出后接下来做什么(中断子程序)
+  23          {
+  24                  static unsigned int T0count;    //无符号int为0~65535
+  25                  TL0 = 0x18;                     //重新给初值。让它再从64535开始 
+  26                  TH0 = 0xFC;
+  27                  T0count++;
+  28                  if(T0count>=1000)
+  29                  {
+  30                          T0count=0;
+  31                          P2_0=~P2_0;     
+  32                  }
+  33          
+  34          }
+  35          */
+  36          
+  37          //电机的三级调速
+  38          
+  39          /*
+  40          unsigned char Counter,Compare,Key,Speed,i;                //调节占空比只要调节Compare的值就可以
+  41          sbit Motor=P1^0;
+  42          
+  43          void main()
+  44          {
+  45                  Timer0Init();
+  46          
+  47                  while(1)
+  48                  {
+  49                          Key=matrixkey();
+  50                          if(Key==1)
+  51                          {
+  52                                  Speed++;
+  53                                  if(Speed==4)
+  54                                          Speed=0;
+  55                                  if(Speed==0){Compare=0;}
+C51 COMPILER V9.01   TIMER0                                                                05/25/2021 15:09:12 PAGE 2   
+
+  56                                  if(Speed==1){Compare=50;}
+  57                                  if(Speed==2){Compare=70;}
+  58                                  if(Speed==3){Compare=100;}
+  59                          }
+  60                          Nixie(1,Speed); 
+  61                  } 
+  62                  
+  63          }
+  64          //100微秒的定时器0
+  65          void Timer0_Routine() interrupt 1       //调用T0，溢出后接下来做什么(中断子程序)
+  66          {
+  67                  TL0 = 0x9C;             //设置定时初始值
+  68                  TH0 = 0xFF;             //设置定时初始值
+  69                  Counter++;
+  70                  if(Counter>=100)
+  71                          Counter=0;
+  72                  if(Counter<Compare)
+  73                  {
+  74                          Motor=1;                          //给1转
+  75                  }
+  76                  else
+  77                  {
+  78                          Motor=0;
+  79                  }
+  80          
+  81          }
+  82          
+  83          
+  84          
+  85          
+  86          
+  87          
+  88          
+  89          
+  90          
+  91          
+  92          
+  93          
+  94          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     23    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

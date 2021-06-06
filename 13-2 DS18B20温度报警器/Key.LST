@@ -1,0 +1,38 @@
+C51 COMPILER V9.01   KEY                                                                   05/22/2021 16:48:33 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN Key.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Key.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "DELAY.H" 
+   3          //获取独立按键的键码
+   4          unsigned char Key()
+   5          {
+   6   1              unsigned char KeyNumber=0;
+   7   1              if(P3_1==0){delay(20);while(P3_1==0);delay(20);KeyNumber=1;}
+   8   1              if(P3_0==0){delay(20);while(P3_0==0);delay(20);KeyNumber=2;}
+   9   1              if(P3_2==0){delay(20);while(P3_2==0);delay(20);KeyNumber=3;}
+  10   1              if(P3_3==0){delay(20);while(P3_3==0);delay(20);KeyNumber=4;}
+  11   1              return KeyNumber;
+  12   1      }
+  13          
+  14          
+  15          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     97    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

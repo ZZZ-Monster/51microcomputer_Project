@@ -1,0 +1,132 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/04/2021  17:38:01  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE project.obj TO project RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  project.obj (PROJECT)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  project (PROJECT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     003AH     UNIT         ?PR?MAIN?PROJECT
+            CODE    003DH     001CH     UNIT         ?PR?_DELAY?PROJECT
+            CODE    0059H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   project (PROJECT)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?PROJECT
+
+?PR?MAIN?PROJECT               -----    -----
+  +--> ?PR?_DELAY?PROJECT
+
+?PR?_DELAY?PROJECT             0008H    0002H
+
+
+
+SYMBOL TABLE OF MODULE:  project (PROJECT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PROJECT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0041H         PUBLIC        _delay
+  B:00A0H.0       PUBLIC        P2_0
+  B:00A0H.1       PUBLIC        P2_1
+  B:00A0H.2       PUBLIC        P2_2
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/04/2021  17:38:01  PAGE 2
+
+
+  B:00A0H.3       PUBLIC        P2_3
+  B:00A0H.4       PUBLIC        P2_4
+  B:00A0H.5       PUBLIC        P2_5
+  B:00A0H.6       PUBLIC        P2_6
+  B:00A0H.7       PUBLIC        P2_7
+  C:0003H         PUBLIC        main
+  C:003DH         SYMBOL        L?0014
+  -------         PROC          L?0013
+  -------         ENDPROC       L?0013
+  C:003DH         SYMBOL        L?0014
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0008H         SYMBOL        i
+  D:0009H         SYMBOL        j
+  -------         ENDDO         
+  C:0041H         LINE#         3
+  C:0041H         LINE#         4
+  C:0041H         LINE#         5
+  C:0045H         LINE#         6
+  C:0045H         LINE#         8
+  C:0048H         LINE#         9
+  C:004BH         LINE#         11
+  C:004BH         LINE#         12
+  C:004EH         LINE#         13
+  C:004EH         LINE#         14
+  C:0051H         LINE#         15
+  C:0056H         LINE#         16
+  C:0058H         LINE#         17
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:0003H         LINE#         21
+  C:0003H         LINE#         22
+  C:0003H         LINE#         23
+  C:0003H         LINE#         24
+  C:0003H         LINE#         25
+  C:0005H         LINE#         26
+  C:0008H         LINE#         27
+  C:000AH         LINE#         28
+  C:000CH         LINE#         29
+  C:000FH         LINE#         30
+  C:0011H         LINE#         31
+  C:0013H         LINE#         32
+  C:0016H         LINE#         33
+  C:0018H         LINE#         34
+  C:001AH         LINE#         35
+  C:001DH         LINE#         36
+  C:001FH         LINE#         37
+  C:0021H         LINE#         38
+  C:0024H         LINE#         39
+  C:0026H         LINE#         40
+  C:0028H         LINE#         41
+  C:002BH         LINE#         42
+  C:002DH         LINE#         43
+  C:002FH         LINE#         44
+  C:0032H         LINE#         45
+  C:0034H         LINE#         46
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/04/2021  17:38:01  PAGE 3
+
+
+  C:0036H         LINE#         47
+  C:0039H         LINE#         48
+  C:003BH         LINE#         50
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PROJECT
+
+Program Size: data=11.0 xdata=0 code=101
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,59 @@
+C51 COMPILER V9.01   MIAN                                                                  05/10/2021 19:09:21 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MIAN
+OBJECT MODULE PLACED IN mian.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE mian.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H" 
+   3          #include "matrixLED.H" 
+   4          
+   5          
+   6          
+   7          void main()
+   8          {
+   9   1              MatrixLED_Init();                       //初始化
+  10   1              while(1)
+  11   1              {       
+  12   2                      unsigned char j,Offset,count;
+  13   2                      unsigned char code TableL[] = {                                   //code的内存大，可以放很多，但是code里的数组不能再修改了
+  14   2                      0x5C,0x55,0x77,0x08,0x7F,0x1D,0x2A,0x49,
+  15   2                      0x7F,0x54,0x7F,0x00,0x7F,0x54,0x7F,0x00,
+  16   2                      0x3C,0x42,0xA9,0x85,0x85,0xA9,0x42,0x3C,
+  17   2                      0x3C,0x42,0xA1,0x85,0x85,0xA1,0x42,0x3C,
+  18   2                      0x3C,0x42,0x81,0x81,0x81,0x81,0x42,0x3C,
+  19   2                      0x00,0x00,0x02,0xFF,0x02,0x00,0x00,0x00,}; //逐帧代码
+  20   2                      
+  21   2                      for(j=0;j<8;j++)                  //8列
+  22   2                      {
+  23   3                              MatrixLED_ShowColumn(j,TableL[j+Offset]);
+  24   3                              delay(1);                          //消影操作
+  25   3                              P0=0xff;
+  26   3                      }
+  27   2                      count++;
+  28   2                      if(count>50)     //count表示代码执行count次之后，左移一位（变相控制了速度）
+  29   2                      {
+  30   3                              count=0;
+  31   3                              Offset+=8;
+  32   3                              if(Offset>45)
+  33   3                                      Offset=0;                  //Offset不能一直加，计算好位置清零
+  34   3                      }               
+  35   2              }
+  36   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     69    ----
+   CONSTANT SIZE    =     48    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

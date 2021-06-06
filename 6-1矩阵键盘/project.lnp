@@ -1,0 +1,6 @@
+"main.obj",
+"delay.obj",
+"LCD1602.obj",
+"matrixkey.obj" 
+TO "project" 
+RAMSIZE(256) 

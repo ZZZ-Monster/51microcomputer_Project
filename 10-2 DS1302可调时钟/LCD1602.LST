@@ -1,0 +1,254 @@
+C51 COMPILER V9.01   LCD1602                                                               05/20/2021 14:27:58 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN LCD1602.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE LCD1602.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H" 
+   3          
+   4          sbit LCD_RS=P2^6;
+   5          sbit LCD_RW=P2^5;
+   6          sbit LCD_E=P2^7;
+   7          
+   8          #define LCD_Datapart P0
+   9          
+  10          
+  11          void LCD_WriteCommand(unsigned char Command)      //½øÐÐÐ´ÉèÖÃµÄÖ¸Áî
+  12          {
+  13   1              LCD_RS=0;
+  14   1              LCD_RW=0;
+  15   1              LCD_Datapart=Command;
+  16   1              LCD_E=1;        //ÉÏÉýÑØÎªÄÉÃë¼¶±ð£¬Ó¦¸ÃÑÓÊ±Ò»ÏÂ£¬¶ÁÈ¡²»¹ýÀ´
+  17   1              delay(1);
+  18   1              LCD_E=0;
+  19   1              delay(1);       //ÏÂ½µÑØÎªÄÉÃë¼¶±ð£¬Ó¦¸ÃÑÓÊ±Ò»ÏÂ£¬¶ÁÈ¡²»¹ýÀ´
+  20   1      }
+  21          
+  22          
+  23          void LCD_WriteData(unsigned char Data)                          //ÓÃ»§¸øµÄ×Ö·ûµÈÊý¾Ý
+  24          {
+  25   1              LCD_RS=1;
+  26   1              LCD_RW=0;
+  27   1              LCD_Datapart=Data;
+  28   1              LCD_E=1;        //ÉÏÉýÑØÎªÄÉÃë¼¶±ð£¬Ó¦¸ÃÑÓÊ±Ò»ÏÂ£¬¶ÁÈ¡²»¹ýÀ´
+  29   1              delay(1);
+  30   1              LCD_E=0;
+  31   1              delay(1);       //ÏÂ½µÑØÎªÄÉÃë¼¶±ð£¬Ó¦¸ÃÑÓÊ±Ò»ÏÂ£¬¶ÁÈ¡²»¹ýÀ´    
+  32   1      }
+  33          
+  34          void LCD_Init(void)
+  35          {
+  36   1              LCD_WriteCommand(0x38);                                                 //³õÊ¼»¯´úÂë0x38  °ËÎ»Êý¾Ý½Ó¿Ú£¬Á½ÐÐÏÔÊ¾£¬5*7µãÕó
+  37   1              LCD_WriteCommand(0x0c);                                                 //          0x0c  ÏÔÊ¾¿ª£¬¹â±ê¹Ø£¬ÉÁË¸¹Ø
+  38   1              LCD_WriteCommand(0x06);                                                 //          0x06  Êý¾Ý¶ÁÐ´²Ù×÷ºó£¬¹â±ê×Ô¶¯¼Ó1£¬»­Ãæ²»¶¯
+  39   1              LCD_WriteCommand(0x01);                                                 //          0x01  ÇåÆÁ
+  40   1                                                                                                              
+  41   1                                                                                                      
+  42   1      }
+  43          
+  44          
+  45          
+  46                                                                                                                                                    
+  47          
+  48          //ÏÔÊ¾Ò»¸ö×Ö·û--------------------------------------------------------------------------------------------
+             ----------
+  49          void LCD_ShowChar(unsigned char Line,unsigned char Column,unsigned char Char)    
+  50          {
+  51   1               if(Line==1)
+  52   1               {
+  53   2                       LCD_WriteCommand(0x80|(Column-1));       //ÏÔÊ¾×Ö·û  0x80|µØÖ· ÉèÖÃ¹â±êÎ»ÖÃ(1000 0000´ú±íËüÊÇÒ»¸öµØÖ·ÉèÖÃµ
+             -ÄÖ¸Áî)
+C51 COMPILER V9.01   LCD1602                                                               05/20/2021 14:27:58 PAGE 2   
+
+  54   2               }
+  55   1               if(Line==2)
+  56   1               {
+  57   2                       LCD_WriteCommand(0x80|(Column-1)+0x40);  //ÏÔÊ¾×Ö·û  0x80|µØÖ· ÉèÖÃ¹â±êÎ»ÖÃ(1000 0000´ú±íËüÊÇÒ»¸öµØÖ·É
+             -èÖÃµÄÖ¸Áî)
+  58   2               }
+  59   1               LCD_WriteData(Char);     //ÏÔÊ¾×Ö·û    //·¢ËÍÊý¾Ý                                                                                         
+  60   1                                                                                                 
+  61   1      }
+  62          
+  63          
+  64          
+  65          
+  66          
+  67          //×Ö·û´®Êý×é----------------------------------------------------------------------------------------------
+             --------
+  68          void LCD_ShowString(unsigned char Line,unsigned char Column,unsigned char String[])  
+  69          {
+  70   1               unsigned char i;
+  71   1               if(Line==1)
+  72   1               {
+  73   2                       LCD_WriteCommand(0x80|(Column-1));      
+  74   2               }
+  75   1               if(Line==2)
+  76   1               {
+  77   2                       LCD_WriteCommand(0x80|(Column-1)+0x40); 
+  78   2               }
+  79   1               for(i=0;String[i]!='\0';i++)     //Êý×é×îºóÒ»Î»±êÖ¾Î»'\0'£¬±éÀúµ½×îºó
+  80   1               {
+  81   2                      LCD_WriteData(String[i]);                //·¢ËÍÊý¾Ý
+  82   2               }
+  83   1              
+  84   1      }
+  85          
+  86          
+  87          //xµÄy´Î·½º¯Êý--------------------------------------------------------------------------------------------
+             ----------
+  88          int LCD_Pow(int X,int Y)
+  89          {
+  90   1               unsigned char i;
+  91   1               int result=1;
+  92   1               for(i=0;i<Y;i++)
+  93   1               {
+  94   2                        result=result*X;
+  95   2               }
+  96   1               return result;
+  97   1      }
+  98          
+  99          
+ 100          //ÏÔÊ¾Êý×Ö
+ 101          void LCD_ShowNum(unsigned char Line,unsigned char Column,unsigned int Number,unsigned char Length)  
+ 102          {
+ 103   1               unsigned char i;
+ 104   1               if(Line==1)
+ 105   1               {
+ 106   2                       LCD_WriteCommand(0x80|(Column-1));      
+ 107   2               }
+ 108   1               if(Line==2)
+ 109   1               {
+ 110   2                       LCD_WriteCommand(0x80|(Column-1)+0x40); 
+ 111   2               }
+ 112   1               for(i=Length;i>0;i--)
+C51 COMPILER V9.01   LCD1602                                                               05/20/2021 14:27:58 PAGE 3   
+
+ 113   1               {                                                                                                         //    Number/100%10; °Ù              i=3              10^(3-1)
+ 114   2                      LCD_WriteData(0x30+Number/LCD_Pow(10,i-1)%10);    //     Number/10%10;  Ê®              i=2              10^(2-1)
+ 115   2                      //ÕâÀï¼Ó0x30ÊÇÎªÁËµÃµ½Êý×ÖÕæÕýµÄASCLLÂëÖµ                 //     Number/1%10;   ¸ö              i=1              10^(1-1)
+ 116   2               }
+ 117   1              
+ 118   1      }
+ 119          
+ 120          
+ 121          
+ 122          
+ 123          //ÏÔÊ¾´øÕý¸ºµÄÕûÊý----------------------------------------------------------------------------------------
+             --------------
+ 124          void LCD_ShowSignedNum(unsigned char Line,unsigned char Column,int Number,unsigned char Length)
+ 125          {
+ 126   1               unsigned char i;  
+ 127   1               if(Line==1)
+ 128   1               {
+ 129   2                       LCD_WriteCommand(0x80|(Column-1));      
+ 130   2               }
+ 131   1               if(Line==2)
+ 132   1               {
+ 133   2                       LCD_WriteCommand(0x80|(Column-1)+0x40); 
+ 134   2               }
+ 135   1               if(Number>=0)
+ 136   1               {
+ 137   2                       LCD_WriteData('+');
+ 138   2      
+ 139   2               }
+ 140   1               else
+ 141   1               {
+ 142   2                       LCD_WriteData('-');
+ 143   2                       Number=-Number;
+ 144   2               }
+ 145   1               for(i=Length;i>0;i--)
+ 146   1               {                                                                                                         //    Number/100%10; °Ù              i=3              10^(3-1)
+ 147   2                      LCD_WriteData(0x30+Number/LCD_Pow(10,i-1)%10);    //     Number/10%10;  Ê®              i=2              10^(2-1)
+ 148   2                      //ÕâÀï¼Ó0x30ÊÇÎªÁËµÃµ½Êý×ÖÕæÕýµÄASCLLÂëÖµ                 //     Number/1%10;   ¸ö              i=1              10^(1-1)
+ 149   2               }
+ 150   1       }
+ 151          
+ 152          
+ 153          //ÏÔÊ¾16½øÖÆÊý--------------------------------------------------------------------------------------------
+             ----------
+ 154          void LCD_ShowHexNum(unsigned char Line,unsigned char Column,unsigned int Number,unsigned char Length)
+ 155          {
+ 156   1               unsigned char i,SingleNumber;  
+ 157   1      
+ 158   1               if(Line==1)
+ 159   1               {
+ 160   2                       LCD_WriteCommand(0x80|(Column-1));      
+ 161   2               }
+ 162   1               if(Line==2)
+ 163   1               {
+ 164   2                       LCD_WriteCommand(0x80|(Column-1)+0x40); 
+ 165   2               }
+ 166   1               for(i=Length;i>0;i--)
+ 167   1               {      
+ 168   2                      SingleNumber=Number/LCD_Pow(16,i-1)%16;
+ 169   2                      if(SingleNumber<10)
+ 170   2                      {
+ 171   3                              LCD_WriteData(0x30+Number/LCD_Pow(16,i-1)%16); //ÕâÀï¼Ó0x30ÊÇÎªÁËµÃµ½Êý×ÖÕæÕýµÄASCLLÂëÖµ
+ 172   3                      }                                                                                                  
+C51 COMPILER V9.01   LCD1602                                                               05/20/2021 14:27:58 PAGE 4   
+
+ 173   2                      else
+ 174   2                      {
+ 175   3                              LCD_WriteData('A'+SingleNumber-10);
+ 176   3                      }         
+ 177   2                                      
+ 178   2                }
+ 179   1       }
+ 180          
+ 181          
+ 182          
+ 183          //ÏÔÊ¾2½øÖÆÊý---------------------------------------------------------------------------------------------
+             ---------
+ 184          void LCD_ShowBinNum(unsigned char Line,unsigned char Column,unsigned int Number,unsigned char Length)
+ 185          {
+ 186   1               unsigned char i;  
+ 187   1               if(Line==1)
+ 188   1               {
+ 189   2                       LCD_WriteCommand(0x80|(Column-1));      
+ 190   2               }
+ 191   1               if(Line==2)
+ 192   1               {
+ 193   2                       LCD_WriteCommand(0x80|(Column-1)+0x40); 
+ 194   2               }
+ 195   1               for(i=Length;i>0;i--)
+ 196   1               {                                                                                                         
+ 197   2                      LCD_WriteData(0x30+Number/LCD_Pow(2,i-1)%2);    
+ 198   2                      //ÕâÀï¼Ó0x30ÊÇÎªÁËµÃµ½Êý×ÖÕæÕýµÄASCLLÂëÖµ                 
+ 199   2               }
+ 200   1      }
+ 201          
+ 202          
+ 203          
+ 204          
+ 205          
+ 206          
+ 207          
+ 208          
+ 209          
+ 210          
+ 211          
+ 212          
+ 213          
+ 214          
+ 215          
+ 216          
+ 217          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    611    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      38
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

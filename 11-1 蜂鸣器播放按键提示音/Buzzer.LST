@@ -1,0 +1,42 @@
+C51 COMPILER V9.01   BUZZER                                                                05/13/2021 10:14:20 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN Buzzer.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE Buzzer.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H" 
+   3          sbit Buzzer=P1^5;
+   4          
+   5          unsigned int i;
+   6          
+   7          void Buzzer_Time(unsigned int ms)               //蜂鸣器响多少毫秒
+   8          
+   9          
+  10          
+  11          {
+  12   1              for(i=0;i<ms;i++)                                 //只有加个循环和延时，蜂鸣器才能响
+  13   1              {
+  14   2                      Buzzer=!Buzzer;
+  15   2                      delay(1);
+  16   2              }
+  17   1      
+  18   1      }
+  19          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     40    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

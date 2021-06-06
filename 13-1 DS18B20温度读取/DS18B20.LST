@@ -1,0 +1,83 @@
+C51 COMPILER V9.01   DS18B20                                                               05/26/2021 10:27:15 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DS18B20
+OBJECT MODULE PLACED IN DS18B20.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE DS18B20.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "LCD1602.H"
+   3          #include "DS18B20 One Wire.H"
+   4          
+   5          //0xcc忽略ROM指令
+   6          //0x44温度转换指令
+   7          //0xbe读指令
+   8          //0x4e写暂存器指令
+   9          //0x48把TH和TL和配置寄存器的内容拷贝到EEPROM
+  10          
+  11          void DS18B20_ConvertT(void)             //开始温度变换    PPT上有
+  12          {
+  13   1              OneWire_Init();
+  14   1              LCD_ShowNum(1,14,OneWire_Init(),2);             //OneWire_Init()返回值为0表示有从机响应
+  15   1              OneWire_SendByte(0xcc);
+  16   1              OneWire_SendByte(0x44);
+  17   1      }
+  18          
+  19          
+  20          float DS18B20_ReadT(void)
+  21          {
+  22   1              unsigned char TLSB,TMSB;
+  23   1              int Temp1,Temp2;         //Temp要放16位
+  24   1              float T;          
+  25   1              OneWire_Init();
+  26   1              OneWire_SendByte(0xcc);
+  27   1              OneWire_SendByte(0xbe);
+  28   1              TLSB=OneWire_ReceiveByte();
+  29   1              TMSB=OneWire_ReceiveByte();
+  30   1      //      LCD_ShowBinNum(1,1,TMSB,8);
+  31   1      //      LCD_ShowBinNum(1,9,TLSB,8);
+  32   1      //      Temp=(TMSB<<8)|TLSB;
+  33   1              Temp1=TMSB;                       //把TLSB，TMSB一起存放到Temp中
+  34   1              Temp2=Temp1<<8;
+  35   1              Temp2=Temp2|TLSB;                 //此三行的功能与上面一行一样Temp=(TMSB<<8)|TLSB;
+  36   1              T=Temp2/16.0;
+  37   1              return T;
+  38   1      }
+  39          
+  40          
+  41          
+  42          
+  43          
+  44          
+  45          
+  46          
+  47          
+  48          
+  49          
+  50          
+  51          
+  52          
+  53          
+  54          
+  55          
+C51 COMPILER V9.01   DS18B20                                                               05/26/2021 10:27:15 PAGE 2   
+
+  56          
+  57          
+  58           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     74    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

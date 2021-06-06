@@ -1,0 +1,76 @@
+C51 COMPILER V9.01   MATRIXKEY                                                             05/20/2021 09:58:33 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MATRIXKEY
+OBJECT MODULE PLACED IN matrixkey.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE matrixkey.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "DELAY.H" 
+   3          unsigned char Key_KeyNumber;
+   4          
+   5          
+   6          
+   7          unsigned char Key(void)
+   8          {
+   9   1              unsigned char Temp;
+  10   1              Temp=Key_KeyNumber;
+  11   1      //      Key_KeyNumber=0;
+  12   1              return Temp;
+  13   1      }
+  14          
+  15          
+  16          
+  17          unsigned char matrixkey_GetState()
+  18          {
+  19   1              unsigned char keynumber=0;
+  20   1              P1_7=0;            //第一列给高电平
+  21   1              if(P1_3==0){keynumber=1;}        //判断第一列的第几个
+  22   1              if(P1_2==0){keynumber=2;}
+  23   1              if(P1_1==0){keynumber=3;}         //把while判断去掉，新加一个函数Key_Loop，用定时器每20ms调用一次
+  24   1              if(P1_0==0){keynumber=4;}
+  25   1              return keynumber;
+  26   1              
+  27   1      }
+  28          
+  29          void Key_Loop(void)
+  30          {
+  31   1              static unsigned char NowState,LastState;
+  32   1              LastState=NowState;
+  33   1              NowState=matrixkey_GetState();
+  34   1              if(LastState==1&&NowState==0){Key_KeyNumber=1;}
+  35   1              if(LastState==2&&NowState==0){Key_KeyNumber=2;}  
+  36   1              if(LastState==3&&NowState==0){Key_KeyNumber=3;}  
+  37   1              if(LastState==4&&NowState==0){Key_KeyNumber=4;}    
+  38   1      }
+  39          
+  40          
+  41          
+  42          
+  43          
+  44          
+  45          
+  46          
+  47          
+  48          
+  49          
+  50          
+  51          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     84    ----
+C51 COMPILER V9.01   MATRIXKEY                                                             05/20/2021 09:58:33 PAGE 2   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

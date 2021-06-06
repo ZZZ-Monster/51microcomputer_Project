@@ -1,0 +1,12 @@
+"main.obj",
+"delay.obj",
+"Nixie.obj",
+"matrixkey.obj",
+"Timer1.obj",
+"Int0.obj",
+"IR.obj",
+"Timer0.obj",
+"Motor.obj" 
+TO "project" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

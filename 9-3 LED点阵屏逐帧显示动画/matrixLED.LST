@@ -1,0 +1,65 @@
+C51 COMPILER V9.01   MATRIXLED                                                             05/10/2021 18:01:02 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MATRIXLED
+OBJECT MODULE PLACED IN matrixLED.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE matrixLED.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H" 
+   3          
+   4          sbit RCK=P3^5;           //RCLK
+   5          sbit SCK=P3^6;           //SRCLK
+   6          sbit SER=P3^4;           //SER
+   7          
+   8          
+   9          //74HC595写入字节（控制D口灯）
+  10          void _74HC595_WriteByte(unsigned char Byte)        //名字不能以数字开头，所以加个下划线
+  11          {
+  12   1              unsigned char i;
+  13   1              for(i=0;i<8;i++)
+  14   1              {
+  15   2                      SER=Byte&0x80;  //把Byte的最高位赋值给SER
+  16   2                      SCK=1;                     //给上升沿使SER输入传入
+  17   2                      SCK=0;                     //置零，为下次做准备
+  18   2                      Byte=Byte<<1;
+  19   2              }
+  20   1              RCK=1;                            //把八位Byte数据送到IO口
+  21   1              RCK=0;                            //置零
+  22   1      
+  23   1      
+  24   1      }
+  25          
+  26          //Lie为列，HangData为一列中灯的亮
+  27          void MatrixLED_ShowColumn(unsigned char Lie,HangData)
+  28          {
+  29   1              _74HC595_WriteByte(HangData);    //_74HC595_WriteByte函数用来写一列中的LED点亮数据
+  30   1              P0=~(0x80>>Lie);           //P0口控制列
+  31   1      }
+  32          
+  33          
+  34          //初始化点阵屏
+  35          void  MatrixLED_Init()
+  36          {
+  37   1              SCK=0;   //初始化脉冲
+  38   1              RCK=0;    //初始化锁存器
+  39   1      }
+  40          
+  41          
+  42          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     52    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

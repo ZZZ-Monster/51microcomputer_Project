@@ -1,0 +1,9 @@
+"main.obj",
+"LCD1602.obj",
+"delay.obj",
+"Int0.obj",
+"Timer0.obj",
+"IR.obj" 
+TO "project" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

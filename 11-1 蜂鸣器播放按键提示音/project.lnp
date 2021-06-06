@@ -1,0 +1,8 @@
+".\delay.obj",
+"matrixkey.obj",
+"Nixie.obj",
+"main.obj",
+"Buzzer.obj" 
+TO "project" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

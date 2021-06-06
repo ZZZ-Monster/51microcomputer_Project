@@ -1,0 +1,39 @@
+C51 COMPILER V9.01   MAIN                                                                  05/20/2021 21:54:06 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.h"
+   3          void main()
+   4          {
+   5   1              while(1)  
+   6   1              {               
+   7   2                      if(P3_2==0)
+   8   2                      {
+   9   3                              delay(100);
+  10   3                              while(P3_2==1);
+  11   3                              delay(100);
+  12   3                              P2_1=~P2_1;
+  13   3                              P1_0=~P1_0;             
+  14   3                      }
+  15   2              }
+  16   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     26    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

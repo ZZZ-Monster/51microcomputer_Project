@@ -1,0 +1,9 @@
+"main.obj",
+".\delay.obj",
+"AT24C02.obj",
+"I2C.obj",
+"LCD1602.obj",
+"matrixkey.obj" 
+TO "project" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

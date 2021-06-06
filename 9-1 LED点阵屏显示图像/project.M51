@@ -1,0 +1,162 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/10/2021  17:46:36  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE mian.obj, delay.obj TO project RAMSIZE (256) DISABLEWARNING (16)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  mian.obj (MIAN)
+  delay.obj (DELAY)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL\C51\LIB\C51S.LIB (?C?COPY)
+
+
+LINK MAP OF MODULE:  project (MIAN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000BH     UNIT         _DATA_GROUP_
+            IDATA   0013H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    00F9H     003DH     UNIT         ?PR?MAIN?MIAN
+            CODE    0136H     0018H     UNIT         ?PR?_MATRIXLED_SHOWCOLUMN?MIAN
+            CODE    014EH     0018H     UNIT         ?PR?_DELAY?DELAY
+            CODE    0166H     0017H     UNIT         ?PR?__74HC595_WRITEBYTE?MIAN
+            CODE    017DH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0189H     0008H     UNIT         ?CO?MIAN
+
+
+
+OVERLAY MAP OF MODULE:   project (MIAN)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?MIAN
+
+?PR?MAIN?MIAN                          0008H    0009H
+  +--> ?CO?MIAN
+  +--> ?PR?_MATRIXLED_SHOWCOLUMN?MIAN
+  +--> ?PR?_DELAY?DELAY
+
+?PR?_MATRIXLED_SHOWCOLUMN?MIAN         -----    -----
+  +--> ?PR?__74HC595_WRITEBYTE?MIAN
+
+?PR?_DELAY?DELAY                       0011H    0002H
+
+
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/10/2021  17:46:36  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  project (MIAN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MIAN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0166H         PUBLIC        __74HC595_WriteByte
+  D:00B0H         PUBLIC        P3
+  C:00F9H         PUBLIC        main
+  C:0189H         SYMBOL        _?ix1000
+  C:0136H         PUBLIC        _MatrixLED_ShowColumn
+  B:00B0H.5       PUBLIC        RCK
+  B:00B0H.6       PUBLIC        SCK
+  B:00B0H.4       PUBLIC        SER
+  -------         PROC          __74HC595_WRITEBYTE
+  D:0007H         SYMBOL        Byte
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0166H         LINE#         10
+  C:0166H         LINE#         11
+  C:0166H         LINE#         13
+  C:0168H         LINE#         14
+  C:0168H         LINE#         15
+  C:016CH         LINE#         16
+  C:016EH         LINE#         17
+  C:0170H         LINE#         18
+  C:0174H         LINE#         19
+  C:0178H         LINE#         20
+  C:017AH         LINE#         21
+  C:017CH         LINE#         24
+  -------         ENDPROC       __74HC595_WRITEBYTE
+  -------         PROC          _MATRIXLED_SHOWCOLUMN
+  D:0003H         SYMBOL        Lie
+  D:0004H         SYMBOL        HangData
+  C:0136H         LINE#         27
+  C:0138H         LINE#         28
+  C:0138H         LINE#         29
+  C:013DH         LINE#         30
+  C:014DH         LINE#         31
+  -------         ENDPROC       _MATRIXLED_SHOWCOLUMN
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        TableL
+  D:0010H         SYMBOL        j
+  -------         ENDDO         
+  C:00F9H         LINE#         34
+  C:00F9H         LINE#         35
+  C:00F9H         LINE#         36
+  C:00FBH         LINE#         37
+  C:00FDH         LINE#         39
+  C:00FDH         LINE#         40
+  C:00FDH         LINE#         41
+  C:0110H         LINE#         43
+  C:0113H         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/10/2021  17:46:36  PAGE 3
+
+
+  C:0113H         LINE#         45
+  C:0121H         LINE#         46
+  C:0128H         LINE#         47
+  C:012BH         LINE#         49
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MIAN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:014EH         PUBLIC        _delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0011H         SYMBOL        i
+  D:0012H         SYMBOL        j
+  -------         ENDDO         
+  C:014EH         LINE#         1
+  C:014EH         LINE#         2
+  C:014EH         LINE#         3
+  C:0152H         LINE#         4
+  C:0152H         LINE#         6
+  C:0155H         LINE#         7
+  C:0158H         LINE#         9
+  C:0158H         LINE#         10
+  C:015BH         LINE#         11
+  C:015BH         LINE#         12
+  C:015EH         LINE#         13
+  C:0163H         LINE#         14
+  C:0165H         LINE#         15
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+Program Size: data=20.0 xdata=0 code=401
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

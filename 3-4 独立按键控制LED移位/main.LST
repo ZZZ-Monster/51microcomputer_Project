@@ -1,0 +1,88 @@
+C51 COMPILER V9.01   MAIN                                                                  04/26/2021 17:30:45 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          void Delay(int ms);      //放在前面时一定要加分号；
+   3          /*LED的左移  0000 0001
+   4                       0000 0010
+   5                                   0000 0100
+   6                                   0000 1000
+   7                                   0001 0000
+   8                                   0010 0000
+   9                                   0100 0000
+  10                                   1000 0000         左移符号<<      */    
+  11          
+  12          
+  13          void main()
+  14          {
+  15   1              unsigned char LED;
+  16   1              P2=~0x01;
+  17   1              while(1)
+  18   1              {
+  19   2      //              P2=~0x01;        //写错了这里
+  20   2                      if(P3_1==0)
+  21   2                      {                                                        
+  22   3                              Delay(100);
+  23   3                              while(P3_1==0);
+  24   3                              Delay(100);
+  25   3                              P2_1=0;
+  26   3                              LED++;
+  27   3                              if(LED>=8)
+  28   3                                      {
+  29   4                                              LED=0;
+  30   4                                      }
+  31   3                              P2=~(0x01<<LED);
+  32   3                      }
+  33   2                      
+  34   2                      if(P3_0==0)
+  35   2                      {                                                        
+  36   3                              Delay(100);
+  37   3                              while(P3_0==0);
+  38   3                              Delay(100);
+  39   3                              if(LED==0)
+  40   3                                      LED=7;
+  41   3                              else
+  42   3                                      LED--;
+  43   3                              P2=~(0x01<<LED);
+  44   3                      }               
+  45   2              }
+  46   1      }
+  47          
+  48          
+  49          //延迟函数----------------------------------------------------------------------------//
+  50          void Delay(int ms)              //@12.000MHz
+  51          {
+  52   1              while(ms)
+  53   1              {
+  54   2                      unsigned char i, j;     
+  55   2                      i = 2;
+C51 COMPILER V9.01   MAIN                                                                  04/26/2021 17:30:45 PAGE 2   
+
+  56   2                      j = 239;
+  57   2                      do
+  58   2                      {
+  59   3                              while (--j);
+  60   3                      } while (--i);
+  61   2                      ms--;
+  62   2              }
+  63   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    114    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

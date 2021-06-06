@@ -1,0 +1,7 @@
+"LCD1602.obj",
+"delay.obj",
+"main.obj",
+"XPT2046.obj" 
+TO "project" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

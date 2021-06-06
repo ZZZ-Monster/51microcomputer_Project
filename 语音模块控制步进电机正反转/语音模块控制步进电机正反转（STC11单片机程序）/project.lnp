@@ -1,0 +1,5 @@
+"LDChip.obj",
+"main.obj",
+"Reg_RW.obj" 
+TO "project" 
+RAMSIZE(256) 

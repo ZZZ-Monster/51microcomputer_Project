@@ -1,0 +1,99 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/28/2021  15:54:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE project.obj TO project RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  project.obj (PROJECT)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  project (PROJECT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000AH     UNIT         ?DT?PROJECT
+            IDATA   0012H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     0063H     UNIT         ?PR?_NIXIE?PROJECT
+            CODE    00F2H     000DH     UNIT         ?C_INITSEG
+            CODE    00FFH     000BH     UNIT         ?PR?MAIN?PROJECT
+
+
+
+OVERLAY MAP OF MODULE:   project (PROJECT)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PROJECT
+  +--> ?C_INITSEG
+
+?PR?MAIN?PROJECT
+  +--> ?PR?_NIXIE?PROJECT
+
+
+
+SYMBOL TABLE OF MODULE:  project (PROJECT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PROJECT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2021  15:54:14  PAGE 2
+
+
+  B:00A0H.4       PUBLIC        P2_4
+  C:00FFH         PUBLIC        main
+  D:0008H         PUBLIC        shumaguan
+  C:008FH         PUBLIC        _NiXie
+  -------         PROC          _NIXIE
+  D:0007H         SYMBOL        Location
+  D:0004H         SYMBOL        Number
+  C:008FH         LINE#         18
+  C:008FH         LINE#         19
+  C:008FH         LINE#         20
+  C:00BCH         LINE#         21
+  C:00BCH         LINE#         22
+  C:00C0H         LINE#         23
+  C:00C4H         LINE#         24
+  C:00C8H         LINE#         25
+  C:00CCH         LINE#         26
+  C:00D4H         LINE#         27
+  C:00DCH         LINE#         28
+  C:00E4H         LINE#         29
+  C:00EAH         LINE#         30
+  C:00EAH         LINE#         31
+  C:00F1H         LINE#         32
+  -------         ENDPROC       _NIXIE
+  -------         PROC          MAIN
+  C:00FFH         LINE#         36
+  C:00FFH         LINE#         37
+  C:00FFH         LINE#         38
+  C:00FFH         LINE#         39
+  C:00FFH         LINE#         40
+  C:0108H         LINE#         41
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PROJECT
+
+Program Size: data=19.0 xdata=0 code=266
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

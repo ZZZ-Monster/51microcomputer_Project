@@ -1,0 +1,130 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/26/2021  17:30:45  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE main.obj TO project RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  project (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         _DATA_GROUP_
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0056H     UNIT         ?PR?MAIN?MAIN
+            CODE    0059H     001CH     UNIT         ?PR?_DELAY?MAIN
+            CODE    0075H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   project (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0001H
+  +--> ?PR?_DELAY?MAIN
+
+?PR?_DELAY?MAIN                0009H    0002H
+
+
+
+SYMBOL TABLE OF MODULE:  project (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00B0H.0       PUBLIC        P3_0
+  B:00A0H.1       PUBLIC        P2_1
+  B:00B0H.1       PUBLIC        P3_1
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/26/2021  17:30:45  PAGE 2
+
+
+  C:0003H         PUBLIC        main
+  C:005DH         PUBLIC        _Delay
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        LED
+  -------         ENDDO         
+  C:0003H         LINE#         13
+  C:0003H         LINE#         14
+  C:0003H         LINE#         16
+  C:0006H         LINE#         17
+  C:0006H         LINE#         18
+  C:0006H         LINE#         20
+  C:0009H         LINE#         21
+  C:0009H         LINE#         22
+  C:000CH         LINE#         23
+  C:000FH         LINE#         24
+  C:0012H         LINE#         25
+  C:0014H         LINE#         26
+  C:0016H         LINE#         27
+  C:001DH         LINE#         28
+  C:001DH         LINE#         29
+  C:0020H         LINE#         30
+  C:0020H         LINE#         31
+  C:0030H         LINE#         32
+  C:0030H         LINE#         34
+  C:0033H         LINE#         35
+  C:0033H         LINE#         36
+  C:0036H         LINE#         37
+  C:0039H         LINE#         38
+  C:003CH         LINE#         39
+  C:0040H         LINE#         40
+  C:0045H         LINE#         42
+  C:0047H         LINE#         43
+  C:0057H         LINE#         44
+  C:0057H         LINE#         45
+  -------         ENDPROC       MAIN
+  C:0059H         SYMBOL        L?0027
+  -------         PROC          L?0026
+  -------         ENDPROC       L?0026
+  C:0059H         SYMBOL        L?0027
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0009H         SYMBOL        i
+  D:000AH         SYMBOL        j
+  -------         ENDDO         
+  C:005DH         LINE#         50
+  C:005DH         LINE#         51
+  C:005DH         LINE#         52
+  C:0061H         LINE#         53
+  C:0061H         LINE#         55
+  C:0064H         LINE#         56
+  C:0067H         LINE#         58
+  C:0067H         LINE#         59
+  C:006AH         LINE#         60
+  C:006DH         LINE#         61
+  C:0072H         LINE#         62
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/26/2021  17:30:45  PAGE 3
+
+
+  C:0074H         LINE#         63
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        MAIN
+
+Program Size: data=12.0 xdata=0 code=129
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

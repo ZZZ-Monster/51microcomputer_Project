@@ -1,0 +1,104 @@
+C51 COMPILER V9.01   MAIN                                                                  05/17/2021 19:51:49 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H" 
+   3          #include "LCD1602.H" 
+   4          #include "matrixkey.H"
+   5          #include "i2c.H"
+   6          #include "AT24C02.H"   
+   7          
+   8          void main()
+   9          {
+  10   1              unsigned char KeyNum;
+  11   1              unsigned int Num;                                  //16位数据
+  12   1              LCD_Init();
+  13   1              LCD_ShowNum(1,1,Num,5);
+  14   1      //      AT24C02_WriteByte(1,2);                 //第一个地址写入
+  15   1      //      delay(10);
+  16   1      ////    AT24C02_WriteByte(2,3);                 //第一个地址写入
+  17   1      ////    delay(10);
+  18   1      //      Data=AT24C02_ReadByte(2);                  //读第一个地址的数据
+  19   1      //      LCD_ShowNum(2,1,Data,3);                        //显示地址的数据（掉电不丢失写入的数据）
+  20   1              while(1)
+  21   1              {
+  22   2                      KeyNum=matrixkey();
+  23   2                      if(KeyNum==1)                               //如果按键是1，Num++
+  24   2                      {
+  25   3                              Num++;
+  26   3                              LCD_ShowNum(1,1,Num,5);
+  27   3                      }
+  28   2                      if(KeyNum==2)                                   //如果按键是2，Num--
+  29   2                      {
+  30   3                              Num--;
+  31   3                              LCD_ShowNum(1,1,Num,5);
+  32   3                      }
+  33   2                      if(KeyNum==3)                                   //如果按键是3，把Num的低八位存入AT24C02
+  34   2                      {
+  35   3                              AT24C02_WriteByte(0,Num%256);  //取Num的低八位
+  36   3                              delay(5);
+  37   3                              AT24C02_WriteByte(1,Num/256);  //取Num的高八位
+  38   3                              delay(5);
+  39   3                              LCD_ShowString(2,1,"Write Ok");
+  40   3                              delay(1000);
+  41   3                              LCD_ShowString(2,1,"         ");
+  42   3                      }
+  43   2                      if(KeyNum==4)
+  44   2                      {
+  45   3                              Num=AT24C02_ReadByte(0);           //读0位置的数据
+  46   3                              Num|=AT24C02_ReadByte(1)<<8;
+  47   3                              LCD_ShowNum(1,1,Num,5);
+  48   3                              LCD_ShowString(2,1,"Read Ok");
+  49   3                              delay(1000);
+  50   3                              LCD_ShowString(2,1,"         ");
+  51   3      
+  52   3                      }
+  53   2              }
+  54   1      }
+  55          
+C51 COMPILER V9.01   MAIN                                                                  05/17/2021 19:51:49 PAGE 2   
+
+  56          
+  57          
+  58          
+  59          
+  60          
+  61          
+  62          
+  63          
+  64          
+  65          
+  66          
+  67          
+  68          
+  69          
+  70          
+  71          
+  72          
+  73          
+  74          
+  75          
+  76          
+  77          
+  78          
+  79          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    223    ----
+   CONSTANT SIZE    =     27    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,69 @@
+C51 COMPILER V9.01   MAIN                                                                  05/23/2021 16:27:09 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "delay.H"
+   3          #include "motor.H"
+   4          #include "NIXIE.H"
+   5          #include "matrixkey.H" 
+   6          #include "IR.H"   
+   7          
+   8          unsigned char Command,Speed;              //调节占空比只要调节Compare的值就可以
+   9          
+  10          
+  11          void main()
+  12          {       
+  13   1              IR_Init();
+  14   1              Motor_Init();
+  15   1              while(1)
+  16   1              {
+  17   2                      if(IR_GetDataFlag())
+  18   2                      {
+  19   3                              Command=IR_GetCommand();
+  20   3                              if(Command==IR_0)  Speed=0;
+  21   3                              if(Command==IR_1)  Speed=1;
+  22   3                              if(Command==IR_2)  Speed=2;
+  23   3                              if(Command==IR_3)  Speed=3;
+  24   3      
+  25   3                                                              
+  26   3                              if(Speed==0){Motor_SetSpeed(0);}
+  27   3                              if(Speed==1){Motor_SetSpeed(50);}
+  28   3                              if(Speed==2){Motor_SetSpeed(70);}
+  29   3                              if(Speed==3){Motor_SetSpeed(100);}
+  30   3                      }
+  31   2                      Nixie(1,Speed); 
+  32   2              } 
+  33   1              
+  34   1      }
+  35          
+  36          
+  37          
+  38          
+  39          
+  40          
+  41          
+  42          
+  43          
+  44          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     99    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.01   MAIN                                                                  05/23/2021 16:27:09 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
